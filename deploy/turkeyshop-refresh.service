@@ -1,0 +1,17 @@
+[Unit]
+Description=Update cached ROUTE product details, sizes and availability
+After=network-online.target
+[Service]
+Type=oneshot
+User=turkeyshop
+Group=turkeyshop
+WorkingDirectory=/opt/turkeyshop
+EnvironmentFile=/etc/turkeyshop.env
+Environment=PYTHONPATH=/opt/turkeyshop/vendor
+ExecStart=/usr/bin/python3 /opt/turkeyshop/importer.py --refresh --limit 240
+TimeoutStartSec=1h
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/turkeyshop

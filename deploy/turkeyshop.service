@@ -1,0 +1,19 @@
+[Unit]
+Description=ROUTE Turkey shoe preorder shop
+After=network-online.target
+Wants=network-online.target
+[Service]
+User=turkeyshop
+Group=turkeyshop
+WorkingDirectory=/opt/turkeyshop
+EnvironmentFile=/etc/turkeyshop.env
+ExecStart=/usr/bin/python3 /opt/turkeyshop/app.py
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/turkeyshop
+[Install]
+WantedBy=multi-user.target

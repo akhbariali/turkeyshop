@@ -1,0 +1,17 @@
+[Unit]
+Description=Refresh ROUTE paginated catalogs and Parisan prices
+After=network-online.target
+[Service]
+Type=oneshot
+User=turkeyshop
+Group=turkeyshop
+WorkingDirectory=/opt/turkeyshop
+EnvironmentFile=/etc/turkeyshop.env
+Environment=PYTHONPATH=/opt/turkeyshop/vendor
+ExecStart=/usr/bin/python3 /opt/turkeyshop/importer.py --catalog
+TimeoutStartSec=2h
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/turkeyshop
